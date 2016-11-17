@@ -201,4 +201,37 @@
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this demo.</string>
     <string name="title_activity_person">person</string>
+
+    <!--    Timeline    -->
+    <string name="input_message">Input your words</string>
+    <string name="jot_down">Send</string>
+    <string name="font_mono">monospace</string>
+    <string name="blank" />
+    <string name="copy_to_clipboard">copy to clipboard</string>
+    <string name="delete_this_message">delete this timeline</string>
+    <string name="copy_to_clipboard_success">copy to clipboard successfully</string>
+    <string name="welcome">Timeline to record your sweet memory</string>
+
+    <string-array name="occurence">
+        <item>Once</item>
+        <item>Weekly</item>
+    </string-array>
+
+    <string-array name="pref_alarm_play_time_entries">
+        <item>10 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>5 minutes</item>
+    </string-array>
+
+    <string-array name="pref_alarm_play_time_values">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>180</item>
+        <item>300</item>
+    </string-array>
 </resources>

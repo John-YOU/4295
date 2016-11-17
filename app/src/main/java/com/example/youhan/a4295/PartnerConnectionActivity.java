@@ -23,8 +23,10 @@ public class PartnerConnectionActivity extends AppCompatActivity {
     private EditText txtPartnerName;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
+    private DatabaseReference chatRef;
     private String partnerName = null;
     private String ownName = null;
+    HashMap<String, Object> chatChannel = new HashMap<>();
     Intent i;
 
     @Override
@@ -35,15 +37,20 @@ public class PartnerConnectionActivity extends AppCompatActivity {
         txtPartnerName = (EditText)findViewById(R.id.etPartnerName);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Users");
+        chatRef = database.getReference("Chat");
     }
 
     public void btPartnerComplete(View v){
         ownName = i.getExtras().getString("username");
         partnerName = txtPartnerName.getText().toString();
         HashMap<String, Object> username = new HashMap<>();
-        HashMap<String, String> partner = new HashMap<>();
-        partner.put("Partner", partnerName);
-        username.put(ownName,partner);
+        HashMap<String, Object> userDetails = new HashMap<>();
+        userDetails.put("Partner", partnerName);
+        username.put(ownName,userDetails);
+
+        chatChannel.put(partnerName+""+ownName, "");
+        chatChannel.put(ownName+""+partnerName, "");
+
         try{
             myRef.updateChildren(username);
         }
@@ -55,7 +62,10 @@ public class PartnerConnectionActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(partnerName)){
                     if(dataSnapshot.child(partnerName).child("Partner").getValue().equals(ownName)){
+                        chatRef.updateChildren(chatChannel);
                         Intent i = new Intent(PartnerConnectionActivity.this, MainActivity.class);
+                        i.putExtra("username",ownName);
+                        i.putExtra("partnername",partnerName);
                         startActivity(i);
                     }
                     else{

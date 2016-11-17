@@ -36,6 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent i = getIntent();
+        final String user = i.getStringExtra("username");
+        final String partner = i.getStringExtra("partnername");
+
         txtEmail = (EditText) findViewById(R.id.etEmail);
         txtPassword = (EditText) findViewById(R.id.etPassword);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -69,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                                         if (dataSnapshot.child(partnerName).child("Partner").getValue().equals(name)) {
                                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                            i.putExtra("username",name);
+                                            i.putExtra("partnername",partnerName);
                                             startActivity(i);
                                         } else {
                                             Intent i = new Intent(LoginActivity.this, InitializationActivity.class);
